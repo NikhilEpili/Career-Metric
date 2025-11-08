@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    container_name: career-metric-backend
+    command: /bin/bash -c "./scripts/prestart.sh && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    volumes:
+      - ./backend/app:/app/app
+      - ./backend/alembic:/app/alembic
+      - ./backend/scripts:/app/scripts
+      - ./backend/.env:/app/.env
+    environment:
+      - PYTHONPATH=/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    container_name: career-metric-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+  db:
+    image: postgres:16-alpine
+    container_name: career-metric-db
+    environment:
+      POSTGRES_USER: career_metric
+      POSTGRES_PASSWORD: career_metric
+      POSTGRES_DB: career_metric
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
