@@ -1,0 +1,24 @@
+[tool.black]
+line-length = 88
+exclude = ["alembic"]
+
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "B", "C", "Q", "W"]
+ignore = ["B008"]
+exclude = ["alembic"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+addopts = "-q"
+
+[tool.coverage.run]
+omit = [
+    "alembic/*",
+    "tests/*",
+]
