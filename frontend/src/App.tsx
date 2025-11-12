@@ -193,14 +193,6 @@ export function App() {
           <ScoreDashboard scoreData={scoreData} summary={summary} />
         </section>
       </main>
-
-      <footer className="footer">
-        <div>
-          <strong>Need a custom cohort dashboard?</strong> Let&apos;s integrate ATS, LMS, and
-          CP platforms together.
-        </div>
-        <button className="cta">Talk to us</button>
-      </footer>
     </div>
   );
 }
